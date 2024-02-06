@@ -98,7 +98,6 @@ import 'package:hive_and_api_for_class/features/course/presentation/viewmodel/co
 import 'package:mockito/mockito.dart';
 
 import '../../../../../../test_data/batch_entity_test.dart';
-import '../../../../../../test_data/course_entity_test.dart';
 import '../../../../auth/presentation/view/login_view_test.mocks.dart';
 
 void main() {
@@ -111,7 +110,6 @@ void main() {
     mockBatchUsecase = MockBatchUseCase();
     mockCourseUsecase = MockCourseUseCase();
     batchEntity = await getBatchListTest();
-    courseEntity = await getCourseListTest();
   });
 
   testWidgets(
@@ -119,9 +117,6 @@ void main() {
     (tester) async {
       when(mockBatchUsecase.getAllBatches())
           .thenAnswer((_) async => Right(batchEntity));
-
-      when(mockCourseUsecase.getAllCourses())
-          .thenAnswer((_) async => Right(courseEntity));
 
       await tester.pumpWidget(
         ProviderScope(
