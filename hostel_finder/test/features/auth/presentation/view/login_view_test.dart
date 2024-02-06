@@ -15,7 +15,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../../../test_data/batch_entity_test.dart';
-import '../../../../../test_data/course_entity_test.dart';
 import '../../../../unit_test/auth_unit_test.mocks.dart';
 import 'login_view_test.mocks.dart';
 
@@ -38,21 +37,17 @@ void main() {
     mockBatchUsecase = MockBatchUseCase();
     mockCourseUsecase = MockCourseUseCase();
     lstBatchEntity = await getBatchListTest();
-    lstCourseEntity = await getCourseListTest();
-
     isLogin = true;
   });
 
   testWidgets('login test with username and password and open dashboard',
       (WidgetTester tester) async {
-    when(mockAuthUsecase.loginStudent('kiran', 'kiran123'))
+    when(mockAuthUsecase.loginStudent('Manoj', 'Manoj123'))
         .thenAnswer((_) async => Right(isLogin));
 
     when(mockBatchUsecase.getAllBatches())
         .thenAnswer((_) async => Right(lstBatchEntity));
 
-    when(mockCourseUsecase.getAllCourses())
-        .thenAnswer((_) async => Right(lstCourseEntity));
 
     await tester.pumpWidget(
       ProviderScope(
@@ -73,9 +68,9 @@ void main() {
     await tester.pumpAndSettle();
 
     // Type in first textformfield/TextField
-    await tester.enterText(find.byType(TextField).at(0), 'kiran');
+    await tester.enterText(find.byType(TextField).at(0), 'Manoj');
     // Type in second textformfield
-    await tester.enterText(find.byType(TextField).at(1), 'kiran123');
+    await tester.enterText(find.byType(TextField).at(1), 'Manoj123');
 
     await tester.tap(
       find.widgetWithText(ElevatedButton, 'Login'),

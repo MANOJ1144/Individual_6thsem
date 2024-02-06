@@ -17,7 +17,6 @@ import 'package:mockito/mockito.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../../../../../test_data/batch_entity_test.dart';
-import '../../../../../test_data/course_entity_test.dart';
 import '../../../../unit_test/auth_unit_test.mocks.dart';
 import 'login_view_test.mocks.dart';
 
@@ -41,15 +40,14 @@ void main() {
     mockCourseUsecase = MockCourseUseCase();
 
     lstBatchEntity = await getBatchListTest();
-    lstCourseEntity = await getCourseListTest();
 
-    authEntity = AuthEntity(
+    authEntity = const AuthEntity(
       id: null,
-      fname: 'Kiran',
-      lname: 'Rana',
+      fname: 'Manoj',
+      lname: 'oli',
       image: '',
       phone: '1234567890',
-      batch: const BatchEntity(
+      batch: BatchEntity(
           batchId: '20df4a89-6c95-44d0-bebf-0980c33bd49f', batchName: '30-B'),
       courses: [
         CourseEntity(
@@ -58,16 +56,15 @@ void main() {
         CourseEntity(
             courseId: '278ce8eb-223c-4c4b-85ba-17dbc83f27ba', courseName: 'API')
       ],
-      username: 'kiran',
-      password: 'kiran123',
+      username: 'Manoj',
+      password: 'Manoj123',
     );
   });
 
   testWidgets('register view ...', (tester) async {
     when(mockBatchUsecase.getAllBatches())
         .thenAnswer((_) async => Right(lstBatchEntity));
-    when(mockCourseUsecase.getAllCourses())
-        .thenAnswer((_) async => Right(lstCourseEntity));
+   
 
     when(mockAuthUsecase.registerStudent(authEntity))
         .thenAnswer((_) async => const Right(true));
@@ -94,16 +91,16 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    // Enter kiran in first textform field
-    await tester.enterText(find.byType(TextFormField).at(0), 'Kiran');
-    // Enter kiran123 in second textform field
-    await tester.enterText(find.byType(TextFormField).at(1), 'Rana');
+    // Enter Manoj in first textform field
+    await tester.enterText(find.byType(TextFormField).at(0), 'Manoj');
+    // Enter Manoj123 in second textform field
+    await tester.enterText(find.byType(TextFormField).at(1), 'oli');
     // Enter phone no
     await tester.enterText(find.byType(TextFormField).at(2), '1234567890');
     // Enter username
-    await tester.enterText(find.byType(TextFormField).at(3), 'kiran');
+    await tester.enterText(find.byType(TextFormField).at(3), 'Manoj');
     // Enter password
-    await tester.enterText(find.byType(TextFormField).at(4), 'kiran123');
+    await tester.enterText(find.byType(TextFormField).at(4), 'Manoj123');
 
     //=========================== Find the dropdownformfield===========================
 

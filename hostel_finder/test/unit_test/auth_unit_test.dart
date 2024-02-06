@@ -47,15 +47,15 @@ void main() {
 
   // While testing this for now comment the navigation part and snackbar part
   test('login test with valid username and', () async {
-    when(mockAuthUsecase.loginStudent('kiran', 'kiran123'))
+    when(mockAuthUsecase.loginStudent('Manoj', 'Manoj123'))
         .thenAnswer((_) => Future.value(const Right(true)));
 
-    when(mockAuthUsecase.loginStudent('kiran', 'kiran1234'))
+    when(mockAuthUsecase.loginStudent('Manoj', 'Manoj1234'))
         .thenAnswer((_) => Future.value(Left(Failure(error: 'Invalid'))));
 
     await container
         .read(authViewModelProvider.notifier)
-        .loginStudent(context, 'kiran', 'kiran1234');
+        .loginStudent(context, 'Manoj', 'Manoj1234');
 
     final authState = container.read(authViewModelProvider);
 
@@ -63,12 +63,12 @@ void main() {
   });
 
   test('check for invalid username and password ', () async {
-    when(mockAuthUsecase.loginStudent('kiran', 'kiran1234'))
+    when(mockAuthUsecase.loginStudent('Manoj', 'Manoj1234'))
         .thenAnswer((_) => Future.value(Left(Failure(error: 'Invalid'))));
 
     await container
         .read(authViewModelProvider.notifier)
-        .loginStudent(context, 'kiran', 'kiran1234');
+        .loginStudent(context, 'Manoj', 'Manoj1234');
 
     final authState = container.read(authViewModelProvider);
 
